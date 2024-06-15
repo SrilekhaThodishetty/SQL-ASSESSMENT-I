@@ -22,7 +22,7 @@ address VARCHAR(100)
 CREATE TABLE Accounts(
 account_id INT PRIMARY KEY,
 customer_id INT,
-account_type CHAR(15),
+account_type VARCHAR(15),
 balance DECIMAL(10, 2),
 FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
@@ -34,7 +34,7 @@ FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 CREATE TABLE Transactions(
 transaction_id VARCHAR(20) PRIMARY KEY ,
 account_id INT ,
-transaction_type CHAR(15),
+transaction_type VARCHAR(15),
 amount DECIMAL(10, 2),
 transaction_date DATETIME
 FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
