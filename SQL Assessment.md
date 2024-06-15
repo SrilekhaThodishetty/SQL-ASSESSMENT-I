@@ -2,6 +2,8 @@
 
 **Database Tables:**
 
+-- CREATING TABLES
+
 1. **Customers:**
 
 ```sql
@@ -50,4 +52,14 @@ account_type VARCHAR(15) ,
 interest_rate DECIMAL(5,2),
 );
 
+```
+
+5. **Branches:**
+
+```sql
+CREATE TABLE Branches(
+branch_id INT PRIMARY KEY ,
+branch_name VARCHAR(15) ,
+address VARCHAR(150),
+);
 ```
