@@ -40,3 +40,14 @@ transaction_date DATETIME
 FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
 );
 ```
+
+4. **InterestRates:**
+
+```sql
+CREATE TABLE InterestRates(
+interest_rate_id INT PRIMARY KEY ,
+account_type VARCHAR(15) ,
+interest_rate DECIMAL(5,2),
+);
+
+```
