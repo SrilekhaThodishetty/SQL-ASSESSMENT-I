@@ -15,3 +15,15 @@ phone_number INT UNIQUE,
 address VARCHAR(100)
 );
 ```
+
+2. **Accounts:**
+
+```sql
+CREATE TABLE Accounts(
+account_id INT PRIMARY KEY,
+customer_id INT,
+account_type CHAR(15),
+balance DECIMAL(10, 2),
+FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+```
