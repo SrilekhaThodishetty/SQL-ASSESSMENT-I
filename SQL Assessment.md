@@ -99,7 +99,7 @@ VALUES (10211, 1, 'current', 25000.00),
        (10217, 7, 'zero_balance', 6000.00),
        (10218, 8, 'savings', 20000.00),
        (10219, 9, 'zero_balance', 58500.00),
-	   (10210, 10, 'zero_balance', 58500.00);
+       (10210, 10, 'zero_balance', 58500.00);
 
 ```
 
@@ -121,9 +121,9 @@ VALUES (123401,10211, 'Deposit', 500.00, '2024-06-01 09:00:00'),
        (123405,10215, 'transfer', 2000.00, '2024-06-04 13:00:00'),
        (123406,10216, 'Withdrawal', 100.00, '2024-06-06 15:00:00'),
        (123407,10217, 'Deposit', 800.00, '2024-06-07 16:30:00'),
-	   (123408,10217, 'transfer',1500.00,'2024-06-07 16:30:00'),
-	   (123409,10219, 'deposit',4000.00,'2024-06-08 17:30:00'),
-	   (123400,10210,  'withdrawal',5100.00,'2024-06-07 16:30:00');
+       (123408,10217, 'transfer',1500.00,'2024-06-07 16:30:00'),
+       (123409,10219, 'deposit',4000.00,'2024-06-08 17:30:00'),
+       (123400,10210,  'withdrawal',5100.00,'2024-06-07 16:30:00');
 
 ```
 
@@ -323,8 +323,8 @@ ORDER BY aggregate_bal DESC;
 ---some duplicate data is added
 INSERT INTO Transactions
 	 VALUES (123411,10211, 'Deposit', 500.00, '2024-06-01 09:00:00'),
-            (123412,10212, 'Withdrawal', 200.00, '2024-06-05 14:30:00'),
-            (123413,10213, 'transfer', 1000.00, '2024-06-02 10:15:00');
+                (123412,10212, 'Withdrawal', 200.00, '2024-06-05 14:30:00'),
+                (123413,10213, 'transfer', 1000.00, '2024-06-02 10:15:00');
 INSERT INTO InterestRates
 ```
 
@@ -336,9 +336,9 @@ Select * from transactions
 
 SELECT t1.account_id,t1.amount,t1.transaction_date FROM Transactions t1
 WHERE t1.account_id  IN (SELECT t2.account_id
-                     FROM Transactions t2
-					 GROUP BY t2.amount ,t2.transaction_date,t2.account_id
-				     Having count(*)>1
+                         FROM Transactions t2
+                         GROUP BY t2.amount ,t2.transaction_date,t2.account_id
+                         Having count(*)>1
 					 )
 GROUP BY t1.account_id, t1.amount, t1.transaction_date;
 
@@ -351,9 +351,9 @@ Select * from transactions
 
 ```sql
 SELECT account_type,
-                (SELECT SUM(balance)
-				 FROM Accounts
-				 WHERE account_type = a.account_type) AS total_balance
+                   (SELECT SUM(balance)
+                   FROM Accounts
+                   WHERE account_type = a.account_type) AS total_balance
 FROM Accounts a
 GROUP BY account_type;
 
