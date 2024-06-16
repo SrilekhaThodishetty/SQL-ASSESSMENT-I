@@ -86,7 +86,7 @@ SELECT * FROM Customers;
 
 ```
 
-![alt text](images\image.png)
+![Uploading image.png…]()
 
 ```sql
 INSERT INTO Accounts
