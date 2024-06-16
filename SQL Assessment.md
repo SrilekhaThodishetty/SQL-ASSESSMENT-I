@@ -86,7 +86,7 @@ SELECT * FROM Customers;
 
 ```
 
-![alt text](image.png)
+![alt text](images\image.png)
 
 ```sql
 INSERT INTO Accounts
@@ -109,7 +109,7 @@ SELECT * FROM Accounts;
 
 ```
 
-![alt text](image-1.png)
+![alt text](images\image-1.png)
 
 ```sql
 
@@ -133,7 +133,7 @@ SELECT * FROM Transactions;
 
 ```
 
-![alt text](image-2.png)
+![alt text](images\image-2.png)
 
 ```sql
 INSERT INTO InterestRates
@@ -150,7 +150,7 @@ SELECT * FROM InterestRates;
 
 ```
 
-![alt text](image-4.png)
+![alt text](images\image-4.png)
 
 ```sql
 
@@ -171,4 +171,192 @@ SELECT * FROM Branches;
 
 ```
 
-![alt text](image-3.png)
+![alt text](images\image-3.png)
+
+2. Write a SQL query to retrieve the name, account type, and email of all customers.
+
+```sql
+SELECT concat(first_name,' ',last_name) AS name,account_type,email
+FROM Customers
+JOIN Accounts
+ON Customers.customer_id=Accounts.customer_id;
+
+```
+
+![alt text](images\image-5.png)
+
+3. Write a SQL query to list all transactions along with the corresponding customer.
+
+```sql
+SELECT concat(first_name,' ',last_name) AS customer_Name,transactions.*
+FROM Transactions
+JOIN Accounts
+ON Transactions.account_id=Accounts.account_id
+JOIN Customers
+ON Accounts.Customer_id=Customers.customer_id;
+```
+
+![alt text](images\image-6.png)
+
+4. Write a SQL query to increase the balance of a specific account by a certain amount.
+
+```sql
+UPDATE Accounts
+SET balance = balance + 5000 -- 5000-> certain amount
+WHERE account_id = 10215; --10213-> account_id
+
+SELECT * FROM Accounts
+WHERE account_id=10215;
+```
+
+![alt text](images\image-7.png)
+
+5. Write a SQL query to combine the first and last names of customers as `full_name`.
+
+```sql
+SELECT concat(first_name ,' ',last_name) AS full_name
+FROM Customers;
+
+UPDATE Accounts
+SET balance = balance + 5000 -- 5000-> certain amount
+WHERE account_id = 10215;
+```
+
+![alt text](images\image-8.png)
+
+6. Write a SQL query to remove accounts with a balance of zero where the account type is savings.
+
+```sql
+DELETE FROM ACCOUNTS
+WHERE balance = 0 AND account_type like 'savings';
+
+SELECT * FROM Accounts;
+```
+
+![alt text](images\image-9.png)
+
+7. Write a SQL query to find customers living in a specific city.
+
+```sql
+SELECT * FROM Customers
+WHERE address like '<%city_name%>';
+
+SELECT * FROM Customers
+WHERE address like '%Hyderabad%';
+```
+
+![alt text](images\image-10.png)
+
+8. Write a SQL query to get the account balance for a specific account.
+
+```sql
+SELECT * FROM Accounts
+WHERE account_id = <account_id>; -- Give account_id;
+
+SELECT account_id,balance FROM Accounts
+WHERE account_id = 10211;
+```
+
+![alt text](images\image-11.png)
+
+9. Write a SQL query to calculate the interest accrued on savings accounts based on a given interest rate.
+
+```sql
+SELECT account_id,balance,interest_rate,(balance*interest_rate/100) AS interest_accured
+FROM Accounts
+JOIN InterestRates
+ON Accounts.account_type=InterestRates.account_type
+WHERE Accounts.account_type like 'savings';
+```
+
+![alt text](images\image-12.png)
+
+10. Write a SQL query to find the average account balance for all customers.
+
+```sql
+SELECT avg(balance) AS avg_balance
+FROM Accounts;
+```
+
+![alt text](images\image-13.png)
+
+11. Write a SQL query to calculate the average daily balance for each account over a specified period.
+
+```sql
+SELECT account_id,avg(daily_balance) AS avg_daily_bal FROM (
+                       SELECT account_id, transaction_date,sum(amount) AS daily_balance
+                       FROM Transactions
+                       WHERE transaction_date BETWEEN '2024-06-01' AND '2024-06-06'
+                       GROUP BY  account_id,transaction_date) AS daily_balance
+GROUP BY account_id;
+
+```
+
+![alt text](images\image-19.png)
+
+12. Identify accounts with the highest number of transactions ordered by descending order.
+
+```sql
+SELECT account_id,count(transaction_id) AS t_count FROM Transactions
+GROUP BY account_id
+ORDER BY t_count desc;
+```
+
+![alt text](images\image-14.png)
+
+13. List customers with high aggregate account balances, along with their account types.
+
+```sql
+SELECT concat(first_name,' ',last_name) AS full_name,sum(balance) aggregate_bal,account_type
+FROM Customers
+JOIN Accounts
+ON Customers.customer_id=Accounts.customer_id
+GROUP BY Customers.customer_id,first_name,last_name,account_type
+ORDER BY aggregate_bal DESC;
+```
+
+![alt text](images\image-15.png)
+
+14. Identify and list duplicate transactions based on transaction amount, date, and account.
+
+```sql
+---some duplicate data is added
+INSERT INTO Transactions
+	 VALUES (123411,10211, 'Deposit', 500.00, '2024-06-01 09:00:00'),
+            (123412,10212, 'Withdrawal', 200.00, '2024-06-05 14:30:00'),
+            (123413,10213, 'transfer', 1000.00, '2024-06-02 10:15:00');
+INSERT INTO InterestRates
+```
+
+![alt text](images\image-16.png)
+
+```sql
+---To get duplicate transactions
+Select * from transactions
+
+SELECT t1.account_id,t1.amount,t1.transaction_date FROM Transactions t1
+WHERE t1.account_id  IN (SELECT t2.account_id
+                     FROM Transactions t2
+					 GROUP BY t2.amount ,t2.transaction_date,t2.account_id
+				     Having count(*)>1
+					 )
+GROUP BY t1.account_id, t1.amount, t1.transaction_date;
+
+Select * from transactions
+```
+
+![alt text](images\image-17.png)
+
+15. Calculate the total balance for each account type, including a subquery within the SELECT clause.
+
+```sql
+SELECT account_type,
+                (SELECT SUM(balance)
+				 FROM Accounts
+				 WHERE account_type = a.account_type) AS total_balance
+FROM Accounts a
+GROUP BY account_type;
+
+```
+
+![alt text](images\image-18.png)
