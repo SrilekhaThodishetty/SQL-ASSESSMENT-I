@@ -109,7 +109,7 @@ SELECT * FROM Accounts;
 
 ```
 
-![alt text](images\image-1.png)
+![alt text](images/image-1.png)
 
 ```sql
 
@@ -133,7 +133,7 @@ SELECT * FROM Transactions;
 
 ```
 
-![alt text](images\image-2.png)
+![alt text](images/image-2.png)
 
 ```sql
 INSERT INTO InterestRates
@@ -150,7 +150,7 @@ SELECT * FROM InterestRates;
 
 ```
 
-![alt text](images\image-4.png)
+![alt text](images/image-4.png)
 
 ```sql
 
@@ -171,7 +171,7 @@ SELECT * FROM Branches;
 
 ```
 
-![alt text](images\image-3.png)
+![alt text](images/image-3.png)
 
 2. Write a SQL query to retrieve the name, account type, and email of all customers.
 
@@ -183,7 +183,7 @@ ON Customers.customer_id=Accounts.customer_id;
 
 ```
 
-![alt text](images\image-5.png)
+![alt text](images/image-5.png)
 
 3. Write a SQL query to list all transactions along with the corresponding customer.
 
@@ -196,7 +196,7 @@ JOIN Customers
 ON Accounts.Customer_id=Customers.customer_id;
 ```
 
-![alt text](images\image-6.png)
+![alt text](images/image-6.png)
 
 4. Write a SQL query to increase the balance of a specific account by a certain amount.
 
@@ -209,7 +209,7 @@ SELECT * FROM Accounts
 WHERE account_id=10215;
 ```
 
-![alt text](images\image-7.png)
+![alt text](images/image-7.png)
 
 5. Write a SQL query to combine the first and last names of customers as `full_name`.
 
@@ -222,7 +222,7 @@ SET balance = balance + 5000 -- 5000-> certain amount
 WHERE account_id = 10215;
 ```
 
-![alt text](images\image-8.png)
+![alt text](images/image-8.png)
 
 6. Write a SQL query to remove accounts with a balance of zero where the account type is savings.
 
@@ -233,7 +233,7 @@ WHERE balance = 0 AND account_type like 'savings';
 SELECT * FROM Accounts;
 ```
 
-![alt text](images\image-9.png)
+![alt text](images/image-9.png)
 
 7. Write a SQL query to find customers living in a specific city.
 
@@ -245,7 +245,7 @@ SELECT * FROM Customers
 WHERE address like '%Hyderabad%';
 ```
 
-![alt text](images\image-10.png)
+![alt text](images/image-10.png)
 
 8. Write a SQL query to get the account balance for a specific account.
 
@@ -257,7 +257,7 @@ SELECT account_id,balance FROM Accounts
 WHERE account_id = 10211;
 ```
 
-![alt text](images\image-11.png)
+![alt text](images/image-11.png)
 
 9. Write a SQL query to calculate the interest accrued on savings accounts based on a given interest rate.
 
@@ -269,7 +269,7 @@ ON Accounts.account_type=InterestRates.account_type
 WHERE Accounts.account_type like 'savings';
 ```
 
-![alt text](images\image-12.png)
+![alt text](images/image-12.png)
 
 10. Write a SQL query to find the average account balance for all customers.
 
@@ -278,7 +278,7 @@ SELECT avg(balance) AS avg_balance
 FROM Accounts;
 ```
 
-![alt text](images\image-13.png)
+![alt text](images/image-13.png)
 
 11. Write a SQL query to calculate the average daily balance for each account over a specified period.
 
@@ -292,7 +292,7 @@ GROUP BY account_id;
 
 ```
 
-![alt text](images\image-19.png)
+![alt text](images/image-19.png)
 
 12. Identify accounts with the highest number of transactions ordered by descending order.
 
@@ -302,7 +302,7 @@ GROUP BY account_id
 ORDER BY t_count desc;
 ```
 
-![alt text](images\image-14.png)
+![alt text](images/image-14.png)
 
 13. List customers with high aggregate account balances, along with their account types.
 
@@ -315,7 +315,7 @@ GROUP BY Customers.customer_id,first_name,last_name,account_type
 ORDER BY aggregate_bal DESC;
 ```
 
-![alt text](images\image-15.png)
+![alt text](images/image-15.png)
 
 14. Identify and list duplicate transactions based on transaction amount, date, and account.
 
@@ -328,7 +328,7 @@ INSERT INTO Transactions
 INSERT INTO InterestRates
 ```
 
-![alt text](images\image-16.png)
+![alt text](images/image-16.png)
 
 ```sql
 ---To get duplicate transactions
@@ -345,7 +345,7 @@ GROUP BY t1.account_id, t1.amount, t1.transaction_date;
 Select * from transactions
 ```
 
-![alt text](images\image-17.png)
+![alt text](images/image-17.png)
 
 15. Calculate the total balance for each account type, including a subquery within the SELECT clause.
 
@@ -359,4 +359,4 @@ GROUP BY account_type;
 
 ```
 
-![alt text](images\image-18.png)
+![alt text](images/image-18.png)
